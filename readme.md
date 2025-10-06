@@ -31,12 +31,10 @@ This mode calculates the number of clusters for a range of ANI thresholds and ge
 ```bash
 usage: ani_cluster determine_threshold [-h] -a ANI [-o OUTPUT] -t START END STEP
 
-  -h, --help            show this help message and exit
-  -a ANI, --ani ANI     all-vs-all fastANI output TSV file.
-  -o OUTPUT, --output OUTPUT
-                        Output plot file name (default: thresholds_vs_clusters.html).
-  -t START END STEP, --thresholds START END STEP
-                        Range of ANI thresholds to test: START END STEP (e.g. 90 99 0.5)
+  -h, --help                                        show this help message and exit
+  -a ANI, --ani ANI                                 all-vs-all fastANI output TSV file.
+  -o OUTPUT, --output OUTPUT                        Output plot file name (default: thresholds_vs_clusters.html).
+  -t START END STEP, --thresholds START END STEP    Range of ANI thresholds to test: START END STEP (e.g. 90 99 0.5)                    
 ```
 
 ### 2. Get representative genomes (medoids)
@@ -45,12 +43,9 @@ This mode clusters genomes using a specified ANI threshold and selects one repre
 ```bash
 usage: ani_cluster get_representatives [-h] -a ANI -t THRESHOLD -o OUTPUT [-c CLUSTER_MEMBERSHIP]
 
-  -h, --help            show this help message and exit
-  -a ANI, --ani ANI     all-vs-all fastANI output TSV file.
-  -t THRESHOLD, --threshold THRESHOLD
-                        ANI threshold for clustering
-  -o OUTPUT, --output OUTPUT
-                        Output file for representative (medoid) genome list.
-  -c CLUSTER_MEMBERSHIP, --cluster_membership CLUSTER_MEMBERSHIP
-                        Cluster membership file (Optional).
+  -h, --help                                                        show this help message and exit
+  -a ANI, --ani ANI                                                 all-vs-all fastANI output TSV file.
+  -t THRESHOLD, --threshold THRESHOLD                               ANI threshold for clustering
+  -o OUTPUT, --output OUTPUT                                        Output file for representative (medoid) genome list.
+  -c CLUSTER_MEMBERSHIP, --cluster_membership CLUSTER_MEMBERSHIP    Cluster membership file (Optional).         
 ```
