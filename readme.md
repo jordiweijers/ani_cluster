@@ -9,7 +9,6 @@ It can determine optimal clustering thresholds and select representative genomes
 - Cluster genomes based on ANI scores
 - Select representative genomes (medoids) from each cluster
 - Interactive HTML plots for threshold vs. number of clusters
-- Command-line interface for easy usage
 
 ## Installation
 
