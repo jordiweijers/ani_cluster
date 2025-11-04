@@ -15,7 +15,7 @@ It can determine optimal clustering thresholds and select representative genomes
 Clone the repository and install via pip:
 
 ```bash
-git clone https://github.com/yourusername/ani_cluster.git
+git clone https://github.com/jordiweijers/ani_cluster.git
 cd ani_cluster
 pip install .
 ```
