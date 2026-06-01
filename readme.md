@@ -38,7 +38,7 @@ usage: ani_cluster determine_threshold [-h] -a ANI [-o OUTPUT] -t START END STEP
 ```
 
 ### 2. Get representative genomes (medoids)
-This mode clusters genomes using a specified ANI threshold and selects one representative genome (medoid) from each cluster. It outputs a non-redundant list of genomes and optionally a file showing cluster membership.
+This mode clusters genomes using a specified ANI threshold and selects one representative genome (medoid or longest) from each cluster. It outputs a non-redundant list of genomes and optionally a file showing cluster membership. Additionally some plots can be generated to aqcuire additional information. 
 
 ```bash
 usage: ani_cluster get_representatives [-h] -a ANI -t THRESHOLD -o OUTPUT [-c CLUSTER_MEMBERSHIP]
@@ -47,5 +47,9 @@ usage: ani_cluster get_representatives [-h] -a ANI -t THRESHOLD -o OUTPUT [-c CL
   -a ANI, --ani ANI                                                 all-vs-all fastANI output TSV file.
   -t THRESHOLD, --threshold THRESHOLD                               ANI threshold for clustering
   -o OUTPUT, --output OUTPUT                                        Output file for representative (medoid) genome list.
-  -c CLUSTER_MEMBERSHIP, --cluster_membership CLUSTER_MEMBERSHIP    Cluster membership file (Optional).         
+  -c CLUSTER_MEMBERSHIP, --cluster_membership CLUSTER_MEMBERSHIP    Cluster membership file (Optional).
+  --method {medoid,longest}
+                        Method for selecting cluster representative: 'medoid' (highest average ANI, default) or 'longest' (largest genome by fragment count).
+  --heatmap FILE        Write pairwise ANI heatmap to this HTML file (Optional).
+  --histogram FILE      Write cluster size distribution histogram to this HTML file (Optional).   
 ```
