@@ -18,8 +18,16 @@ def main():
         rep_parser = subparsers.add_parser("get_representatives", help="Get dereplicated representative genomes (medoids)")
         rep_parser.add_argument("-a", "--ani", required=True, help="all-vs-all fastANI output TSV file.")
         rep_parser.add_argument("-t", "--threshold", type=float, required=True, help="ANI threshold for clustering")
-        rep_parser.add_argument("-o", "--output", required=True, help="Output file for representative (medoid) genome list.")
+        rep_parser.add_argument("-o", "--output", required=True, help="Output file for representative genome list.")
         rep_parser.add_argument("-c", "--cluster_membership", help="Cluster membership file (Optional).")
+        rep_parser.add_argument(
+                "--method",
+                choices=["medoid", "longest"],
+                default="medoid",
+                help="Method for selecting cluster representative: 'medoid' (highest average ANI, default) or 'longest' (largest genome by fragment count).",
+        )
+        rep_parser.add_argument("--heatmap", metavar="FILE", help="Write pairwise ANI heatmap to this HTML file (Optional).")
+        rep_parser.add_argument("--histogram", metavar="FILE", help="Write cluster size distribution histogram to this HTML file (Optional).")
 
         args = parser.parse_args()
 
@@ -40,11 +48,24 @@ def main():
                         sys.exit(0)
 
                 elif args.mode == "get_representatives":
-                        logger.info(f"Performing dereplication with ANI threshold {args.threshold}.")
-                        medoids, clusters = get_representatives(args.ani, args.threshold, args.output, args.cluster_membership, logger)
-                        logger.info(f"Found {len(clusters)} clusters. Representative genomes (medoids) from each are written to: {args.output}")
+                        logger.info(f"Performing dereplication with ANI threshold {args.threshold} using method '{args.method}'.")
+                        _, clusters = get_representatives(
+                                args.ani,
+                                args.threshold,
+                                args.output,
+                                args.cluster_membership,
+                                logger,
+                                method=args.method,
+                                heatmap_file=args.heatmap,
+                                histogram_file=args.histogram,
+                        )
+                        logger.info(f"Found {len(clusters)} clusters. Representatives written to: {args.output}")
                         if args.cluster_membership:
                                 logger.info(f"Cluster membership saved to: {args.cluster_membership}")
+                        if args.heatmap:
+                                logger.info(f"ANI heatmap saved to: {args.heatmap}")
+                        if args.histogram:
+                                logger.info(f"Cluster size histogram saved to: {args.histogram}")
                         sys.exit(0)
 
                 else:
