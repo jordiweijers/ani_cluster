@@ -45,6 +45,35 @@ def cluster_fastani(df: pd.DataFrame, all_genomes_list: list[str]) -> list[list[
         except Exception as e:
                 raise RuntimeError(f"Clustering failed: {e}")
 
+def get_longest(cluster: list, df: pd.DataFrame) -> str:
+        """
+        Finds the genome with the highest fragment count (proxy for longest genome length).
+        Uses the frags_total column from fastANI output, which is proportional to query genome size.
+        Args:
+                cluster (list): A list containing all the genomes of a corresponding cluster.
+                df (pd.DataFrame): A Pandas DataFrame containing the fastANI output.
+        Returns:
+                longest (str): The genome with the most fragments in the cluster.
+        """
+        if not cluster:
+                raise ValueError("Input cluster is empty")
+        if df.empty:
+                raise ValueError("Input DataFrame is empty")
+        try:
+                if len(cluster) == 1:
+                        return cluster[0]
+                query_rows = df[df["query"].isin(cluster)]
+                if query_rows.empty:
+                        return cluster[0]
+                lengths = query_rows.groupby("query")["frags_total"].max()
+                for g in cluster:
+                        if g not in lengths.index:
+                                lengths[g] = 0
+                return str(lengths.idxmax())
+        except Exception as e:
+                raise RuntimeError(f"Longest genome selection failed: {e}")
+
+
 def get_medoid(cluster: list, df: pd.DataFrame) -> str:
         """
         Finds the medoid of a cluster (highest average-ANI)
