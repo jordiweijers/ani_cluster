@@ -48,8 +48,7 @@ usage: ani_cluster get_representatives [-h] -a ANI -t THRESHOLD -o OUTPUT [-c CL
   -t THRESHOLD, --threshold THRESHOLD                               ANI threshold for clustering
   -o OUTPUT, --output OUTPUT                                        Output file for representative (medoid) genome list.
   -c CLUSTER_MEMBERSHIP, --cluster_membership CLUSTER_MEMBERSHIP    Cluster membership file (Optional).
-  --method {medoid,longest}
-                        Method for selecting cluster representative: 'medoid' (highest average ANI, default) or 'longest' (largest genome by fragment count).
-  --heatmap FILE        Write pairwise ANI heatmap to this HTML file (Optional).
-  --histogram FILE      Write cluster size distribution histogram to this HTML file (Optional).   
+  --method {medoid,longest}                                         Method for selecting cluster representative: 'medoid' (highest average ANI, default) or 'longest' (largest genome by fragment count).
+  --heatmap FILE                                                    Write pairwise ANI heatmap to this HTML file (Optional).
+  --histogram FILE                                                  Write cluster size distribution histogram to this HTML file (Optional).   
 ```
